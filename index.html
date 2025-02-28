@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'Équipement Légendaire</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white font-inter antialiased">
+    <div class="container max-w-6xl mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8 text-center">
+            <h1
+                class="text-4xl md:text-5xl font-cinzel font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300">
+                Générateur d'Équipement</h1>
+            <p class="text-gray-400 max-w-2xl mx-auto">Créez des armes et des armures légendaires pour vos héros
+                d'aventure</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Equipment Display -->
+            <div class="lg:col-span-2 order-2 lg:order-1">
+                <!-- Equipment Card -->
+                <div id="equipment-display" class="transition-all duration-300 ease-in-out">
+                    <!-- Equipment content will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Sidebar Controls -->
+            <div class="lg:col-span-1 order-1 lg:order-2">
+                <!-- Inventory Controls -->
+                <div
+                    class="bg-gray-800 bg-opacity-70 backdrop-filter backdrop-blur-sm rounded-xl shadow-xl p-6 mb-6 border border-gray-700">
+                    <h3 class="text-xl font-bold font-cinzel mb-4 text-yellow-300">Générateur</h3>
+
+                    <div class="flex items-center justify-between mb-4">
+                        <button id="prev-button"
+                            class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:opacity-50 transition-colors duration-200"
+                            disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+
+                        <div class="text-center">
+                            <span class="text-lg font-medium" id="inventory-counter">0/0</span>
+                            <p class="text-xs text-gray-400" id="progression-info">0/0 possibilités</p>
+                        </div>
+
+                        <button id="next-button"
+                            class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:opacity-50 transition-colors duration-200"
+                            disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="space-y-3">
+                        <button id="generate-button"
+                            class="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 font-medium transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                            </svg>
+                            Générer un équipement
+                        </button>
+
+                        <button id="delete-button"
+                            class="w-full py-3 px-4 rounded-lg bg-red-600 hover:bg-red-700 font-medium disabled:bg-gray-600 disabled:opacity-50 transition-all duration-200 flex items-center justify-center"
+                            disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            Supprimer l'équipement
+                        </button>
+
+                        <button id="export-button"
+                            class="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 font-medium disabled:bg-gray-600 disabled:opacity-50 transition-all duration-200 flex items-center justify-center"
+                            disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Exporter l'inventaire
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div
+                    class="bg-gray-800 bg-opacity-70 backdrop-filter backdrop-blur-sm rounded-xl shadow-xl p-6 border border-gray-700">
+                    <h3 class="text-xl font-bold font-cinzel mb-4 text-yellow-300">Filtres</h3>
+
+                    <div class="relative mb-4">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <input id="search-input" type="text" placeholder="Rechercher par nom..."
+                            class="block w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="type-filter" class="block text-sm font-medium text-gray-300 mb-1">Type
+                                d'équipement</label>
+                            <select id="type-filter"
+                                class="block w-full px-4 py-2.5 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                                <option value="">Tous les types</option>
+                                <!-- Options added dynamically -->
+                            </select>
+                        </div>
+                        <div>
+                            <label for="rarity-filter"
+                                class="block text-sm font-medium text-gray-300 mb-1">Rareté</label>
+                            <select id="rarity-filter"
+                                class="block w-full px-4 py-2.5 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                                <option value="">Toutes les raretés</option>
+                                <!-- Options added dynamically -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="reset-filters"
+                        class="w-full py-2.5 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 font-medium transition-colors duration-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        Réinitialiser les filtres
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Dashboard -->
+        <div
+            class="bg-gray-800 bg-opacity-70 backdrop-filter backdrop-blur-sm rounded-xl shadow-xl p-6 mb-12 border border-gray-700">
+            <h3 class="text-xl font-bold font-cinzel mb-6 text-yellow-300">Statistiques d'inventaire</h3>
+
+
+            <div id="inventory-grid" class="grid grid-cols-4 gap-4">
+                <!-- Les objets seront insérés ici dynamiquement -->
+            </div>
+    
+            <div class="flex justify-center mt-6 mb-6">
+                <button id="prev-page" class="px-4 py-2 bg-blue-600 text-white rounded-l">Précédent</button>
+                <span id="page-info" class="px-4 py-2 bg-gray-700">Page 1 sur 5</span>
+                <button id="next-page" class="px-4 py-2 bg-blue-600 text-white rounded-r">Suivant</button>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div
+                    class="bg-gray-700 bg-opacity-60 rounded-lg p-4 border border-gray-600 transition-all duration-300 hover:bg-opacity-80 hover:border-blue-500">
+                    <div class="flex items-center mb-3">
+                        <div class="p-2 rounded-md bg-blue-500 bg-opacity-20 mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                            </svg>
+                        </div>
+                        <h4 class="text-sm font-medium text-gray-300">Équipements</h4>
+                    </div>
+                    <div class="text-2xl font-bold" id="stats-count">0</div>
+                </div>
+
+                <div
+                    class="bg-gray-700 bg-opacity-60 rounded-lg p-4 border border-gray-600 transition-all duration-300 hover:bg-opacity-80 hover:border-green-500">
+                    <div class="flex items-center mb-3">
+                        <div class="p-2 rounded-md bg-green-500 bg-opacity-20 mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                            </svg>
+                        </div>
+                        <h4 class="text-sm font-medium text-gray-300">Types uniques</h4>
+                    </div>
+                    <div class="text-2xl font-bold" id="stats-types">0</div>
+                </div>
+
+                <div
+                    class="bg-gray-700 bg-opacity-60 rounded-lg p-4 border border-gray-600 transition-all duration-300 hover:bg-opacity-80 hover:border-purple-500">
+                    <div class="flex items-center mb-3">
+                        <div class="p-2 rounded-md bg-purple-500 bg-opacity-20 mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            </svg>
+                        </div>
+                        <h4 class="text-sm font-medium text-gray-300">Raretés uniques</h4>
+                    </div>
+                    <div class="text-2xl font-bold" id="stats-rarities">0</div>
+                </div>
+
+                <div
+                    class="bg-gray-700 bg-opacity-60 rounded-lg p-4 border border-gray-600 transition-all duration-300 hover:bg-opacity-80 hover:border-yellow-500">
+                    <div class="flex items-center mb-3">
+                        <div class="p-2 rounded-md bg-yellow-500 bg-opacity-20 mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h4 class="text-sm font-medium text-gray-300">Valeur totale</h4>
+                    </div>
+                    <div class="text-2xl font-bold text-yellow-300" id="stats-value">0 or</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center py-6">
+            <p class="text-gray-500 text-sm">&copy; 2025 Générateur d'Équipement Légendaire</p>
+            <div class="flex justify-center mt-3 space-x-4">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                    <span class="sr-only">GitHub</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                    <span class="sr-only">Discord</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3847-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
+                    </svg>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
