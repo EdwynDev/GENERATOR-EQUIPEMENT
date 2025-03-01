@@ -370,7 +370,7 @@ const renderEquipment = (equipment) => {
     for (let i = 0; i < equipment.stars; i++) {
         html += `<span style="color: ${equipment.starColor}">★</span>`;
     }
-    for (let i = equipment.stars; i < 10; i++) {
+    for (let i = equipment.stars; i < 11; i++) {
         html += `<span class="text-gray-600">★</span>`;
     }
 
