@@ -159,6 +159,191 @@ const statsCount = document.getElementById('stats-count');
 const statsTypes = document.getElementById('stats-types');
 const statsRarities = document.getElementById('stats-rarities');
 const statsValue = document.getElementById('stats-value');
+// Variables pour l'index
+let indexPage = 0;
+const itemsPerPage = 20; // Nombre d'items par page de l'index
+let allPossibleItems = [];
+
+// Référence aux éléments DOM de l'index
+const indexModal = document.getElementById('index-modal');
+const showIndexButton = document.getElementById('show-index');
+const closeIndexButton = document.getElementById('close-index');
+const indexGrid = document.getElementById('index-grid');
+const indexPagination = document.getElementById('index-pagination');
+const indexPrevButton = document.getElementById('index-prev');
+const indexNextButton = document.getElementById('index-next');
+
+// Générer la liste complète des équipements possibles
+const generateAllPossibleItems = () => {
+  const allItems = [];
+
+  for (const type of equipmentData.equipmentTypes) {
+    for (const name of equipmentData.namesByType[type]) {
+      for (const rarity of equipmentData.rarities) {
+        for (const quality of equipmentData.qualities) {
+          for (let stars = 1; stars <= 11; stars++) {
+            // Créer un objet représentant chaque combinaison possible
+            const item = {
+              id: `${type}-${name}-${rarity}-${quality}-${stars}`,
+              name,
+              type,
+              rarity,
+              quality,
+              stars,
+              owned: false // Par défaut, non possédé
+            };
+            allItems.push(item);
+          }
+        }
+      }
+    }
+  }
+
+  return allItems;
+};
+
+// Vérifier si un item est dans l'inventaire
+const checkIfOwned = () => {
+  allPossibleItems.forEach(item => {
+    item.owned = inventory.some(invItem =>
+      invItem.name === item.name &&
+      invItem.type === item.type &&
+      invItem.rarity === item.rarity &&
+      invItem.quality === item.quality &&
+      invItem.stars === item.stars
+    );
+  });
+};
+
+// Afficher la page actuelle de l'index
+const renderIndexPage = () => {
+  indexGrid.innerHTML = '';
+
+  const start = indexPage * itemsPerPage;
+  const end = start + itemsPerPage;
+  const pageItems = allPossibleItems.slice(start, end);
+
+  pageItems.forEach(item => {
+    const itemDiv = document.createElement('div');
+    itemDiv.className = `bg-gray-800 rounded p-3 flex flex-col items-center relative`;
+
+    // Ajouter le cadenas pour les items non possédés
+    if (!item.owned) {
+      const lockIcon = document.createElement('div');
+      lockIcon.className = 'absolute top-2 right-2 text-gray-400';
+      lockIcon.innerHTML = feather.icons.lock.toSvg({ width: 16, height: 16 });
+      itemDiv.appendChild(lockIcon);
+
+      const itemName = document.createElement('div');
+      itemName.className = `font-bold text-sm mb-1 text-center rarity-${(item.rarity).toLowerCase()} ${(item.rarity).toLowerCase()}-item`;
+      itemName.style.color = rarityColors[item.rarity] || '#ffffff';
+      itemName.textContent = "???";
+
+      const itemType = document.createElement('div');
+      itemType.className = 'text-xs text-gray-400 mb-1';
+      itemType.textContent = "???";
+
+      const itemDetails = document.createElement('div');
+      itemDetails.className = 'text-xs text-gray-300 mb-1';
+      itemDetails.textContent = `??? • ???`;
+
+      itemDiv.appendChild(itemName);
+      itemDiv.appendChild(itemType);
+      itemDiv.appendChild(itemDetails);
+    } else {
+
+      const itemName = document.createElement('div');
+      itemName.className = `font-bold text-sm mb-1 text-center rarity-${(item.rarity).toLowerCase()} ${(item.rarity).toLowerCase()}-item`;
+      itemName.style.color = rarityColors[item.rarity] || '#ffffff';
+      itemName.textContent = item.name;
+
+      const itemType = document.createElement('div');
+      itemType.className = 'text-xs text-gray-400 mb-1';
+      itemType.textContent = item.type;
+
+      const itemDetails = document.createElement('div');
+      itemDetails.className = 'text-xs text-gray-300 mb-1';
+      itemDetails.textContent = `${item.rarity} • ${item.quality}`;
+
+      const itemStars = document.createElement('div');
+      itemStars.className = 'text-xs';
+      const starColor = item.rarity === 'Céleste' ? '#280f3d' :
+        item.rarity === 'Divin' ? '#ffd700' :
+          item.rarity === 'Mythique' ? '#e01a6b' :
+            '#ffcc00';
+
+      for (let i = 0; i < item.stars; i++) {
+        const star = document.createElement('span');
+        star.className = `rarity-${(item.rarity).toLowerCase()} ${(item.rarity).toLowerCase()}-item`
+        star.style.color = starColor;
+        star.textContent = '★';
+        itemStars.appendChild(star);
+      }
+
+      for (let i = item.stars; i < 11; i++) {
+        const star = document.createElement('span');
+        star.className = 'text-gray-600';
+        star.textContent = '★';
+        itemStars.appendChild(star);
+      }
+
+      itemDiv.appendChild(itemName);
+      itemDiv.appendChild(itemType);
+      itemDiv.appendChild(itemDetails);
+      itemDiv.appendChild(itemStars);
+    }
+
+    indexGrid.appendChild(itemDiv);
+  });
+
+  // Mise à jour de la pagination
+  const totalPages = Math.ceil(allPossibleItems.length / itemsPerPage);
+  indexPagination.textContent = `Page ${indexPage + 1} / ${totalPages}`;
+
+  // Activer/désactiver les boutons de navigation
+  indexPrevButton.disabled = indexPage === 0;
+  indexNextButton.disabled = indexPage >= totalPages - 1;
+};
+
+// Ouvrir l'index
+const openIndex = () => {
+  // Si ce n'est pas déjà fait, générer tous les items possibles
+  if (allPossibleItems.length === 0) {
+    allPossibleItems = generateAllPossibleItems();
+  }
+
+  // Vérifier quels items sont déjà dans l'inventaire
+  checkIfOwned();
+
+  // Afficher la première page
+  indexPage = 0;
+  renderIndexPage();
+
+  // Afficher la modal
+  indexModal.classList.remove('hidden');
+};
+
+// Fermer l'index
+const closeIndex = () => {
+  indexModal.classList.add('hidden');
+};
+
+// Page précédente de l'index
+const prevIndexPage = () => {
+  if (indexPage > 0) {
+    indexPage--;
+    renderIndexPage();
+  }
+};
+
+// Page suivante de l'index
+const nextIndexPage = () => {
+  const totalPages = Math.ceil(allPossibleItems.length / itemsPerPage);
+  if (indexPage < totalPages - 1) {
+    indexPage++;
+    renderIndexPage();
+  }
+};
 
 // Générer un ID unique
 const generateId = () => Math.random().toString(36).substr(2, 9);
@@ -242,6 +427,12 @@ const generateEquipment = () => {
   currentIndex = inventory.length - 1;
   localStorage.setItem('inventory', JSON.stringify(inventory));
   updateUI();
+
+  // Mettre à jour l'index si ouvert
+  if (!indexModal.classList.contains('hidden') && allPossibleItems.length > 0) {
+    checkIfOwned();
+    renderIndexPage();
+  }
 };
 
 // Filtrer l'inventaire
@@ -470,6 +661,12 @@ const updateUI = () => {
   // Mise à jour des statistiques
   updateStats();
 
+  // Mise à jour de l'index si ouvert
+  if (!indexModal.classList.contains('hidden') && allPossibleItems.length > 0) {
+    checkIfOwned();
+    renderIndexPage();
+  }
+
   // Initialiser Feather Icons
   feather.replace();
 };
@@ -479,6 +676,10 @@ generateButton.addEventListener('click', generateEquipment);
 prevButton.addEventListener('click', goToPrevious);
 nextButton.addEventListener('click', goToNext);
 resetFiltersButton.addEventListener('click', resetFilters);
+showIndexButton.addEventListener('click', openIndex);
+closeIndexButton.addEventListener('click', closeIndex);
+indexPrevButton.addEventListener('click', prevIndexPage);
+indexNextButton.addEventListener('click', nextIndexPage);
 
 searchInput.addEventListener('input', (e) => {
   filter = e.target.value;
