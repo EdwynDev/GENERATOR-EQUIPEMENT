@@ -160,28 +160,6 @@ const statsTypes = document.getElementById('stats-types');
 const statsRarities = document.getElementById('stats-rarities');
 const statsValue = document.getElementById('stats-value');
 
-function renderInventoryGrid() {
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const filteredInventory = getFilteredInventory();
-  const paginatedItems = filteredInventory.slice(startIndex, endIndex);
-
-  const grid = document.getElementById('inventory-grid');
-  grid.innerHTML = paginatedItems.map(item => `
-    <div class="bg-gray-800 p-4 rounded-lg">
-        <h3 class="text-lg font-bold">${item.name}</h3>
-        <p class="text-sm text-gray-400">${item.type} - ${item.rarity}</p>
-        <p class="text-sm text-gray-400">${item.quality}</p>
-    </div>
-`).join('');
-
-  const pageInfo = document.getElementById('page-info');
-  pageInfo.textContent = `Page ${currentPage} sur ${Math.ceil(filteredInventory.length / itemsPerPage)}`;
-
-  document.getElementById('prev-page').disabled = currentPage === 1;
-  document.getElementById('next-page').disabled = currentPage === Math.ceil(filteredInventory.length / itemsPerPage);
-}
-
 // Générer un ID unique
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
@@ -264,7 +242,6 @@ const generateEquipment = () => {
   currentIndex = inventory.length - 1;
   localStorage.setItem('inventory', JSON.stringify(inventory));
   updateUI();
-  renderInventoryGrid()
 };
 
 // Filtrer l'inventaire
