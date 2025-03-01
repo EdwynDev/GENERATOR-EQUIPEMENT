@@ -351,7 +351,7 @@ const renderEquipment = (equipment) => {
         <div class="p-6 bg-gray-800 rounded-lg shadow-lg">
           <div class="flex flex-col items-center mb-4">
             <h2 
-              class="text-2xl font-bold mb-1 rarity-${(equipment.rarity).toLowerCase()}"
+              class="text-2xl font-bold mb-1 rarity-${(equipment.rarity).toLowerCase()} ${(equipment.rarity).toLowerCase()}-item"
               style="color: ${rarityColors[equipment.rarity] || '#ffffff'}"
             >
               ${equipment.name}
