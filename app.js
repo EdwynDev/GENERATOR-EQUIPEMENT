@@ -55,7 +55,7 @@ const rarityColors = {
 
 // Fonction pour générer les données nécessaires
 function generateEquipmentData() {
-    const equipmentTypes = ['Arme', 'Armure', 'Accessoire', 'Bouclier', 'Casque', 'Bottes', 'Gants', 'Ceinture', 'Jambières'];
+    const equipmentTypes = ['Arme', 'Armure', 'Accessoire', 'Bouclier', 'Casque', 'Bottes', 'Gants', 'Ceinture', 'Jambières','Pouvoir'];
     const rarities = ['Commun', 'Peu_commun', 'Rare', 'Épique', 'Légendaire', 'Mythique', 'Divin', 'Primordial', 'Éternel', 'Céleste'];
     const qualities = ['Endommagée', 'Normale', 'Supérieure', 'Avancée', 'Parfaite', 'Flamboyante', 'Divine', 'Immatérielle'];
 
@@ -96,6 +96,10 @@ function generateEquipmentData() {
         'Jambières': [
             'Jambières de fer', 'Jambières de cuir', 'Jambières de l\'explorateur', 'Jambières de feu', 'Jambières de givre',
             'Jambières de l\'ombre', 'Jambières de la montagne', 'Jambières du vent', 'Jambières de l\'enfer', 'Jambières célestes'
+        ],
+        'Pouvoir': [
+            'Manipulation Feu', 'Manipulation Eau', 'Manipulation Terre', 'Manipulation Air', 'Manipulation Lumière',
+            'Manipulation Ténèbres', 'Manipulation Trou Noir', 'Manipulation du Temps', 'Invocation des Ombres', 'Transformation en Titan'
         ]
     };
 
