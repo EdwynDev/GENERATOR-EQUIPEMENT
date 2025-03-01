@@ -82,28 +82,6 @@
                             </svg>
                             Générer un équipement
                         </button>
-
-                        <button id="delete-button"
-                            class="w-full py-3 px-4 rounded-lg bg-red-600 hover:bg-red-700 font-medium disabled:bg-gray-600 disabled:opacity-50 transition-all duration-200 flex items-center justify-center"
-                            disabled>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                            Supprimer l'équipement
-                        </button>
-
-                        <button id="export-button"
-                            class="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 font-medium disabled:bg-gray-600 disabled:opacity-50 transition-all duration-200 flex items-center justify-center"
-                            disabled>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                            </svg>
-                            Exporter l'inventaire
-                        </button>
                     </div>
                 </div>
 
@@ -124,7 +102,7 @@
                             class="block w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div class="grid grid-row-1 sm:grid-row-2 gap-4 mb-4">
                         <div>
                             <label for="type-filter" class="block text-sm font-medium text-gray-300 mb-1">Type
                                 d'équipement</label>
@@ -164,11 +142,11 @@
             <h3 class="text-xl font-bold font-cinzel mb-6 text-yellow-300">Statistiques d'inventaire</h3>
 
 
-            <div id="inventory-grid" class="grid grid-cols-4 gap-4">
+            <div id="inventory-grid" class="grid grid-cols-4 gap-4 hidden">
                 <!-- Les objets seront insérés ici dynamiquement -->
             </div>
     
-            <div class="flex justify-center mt-6 mb-6">
+            <div class="flex justify-center mt-6 mb-6 hidden">
                 <button id="prev-page" class="px-4 py-2 bg-blue-600 text-white rounded-l">Précédent</button>
                 <span id="page-info" class="px-4 py-2 bg-gray-700">Page 1 sur 5</span>
                 <button id="next-page" class="px-4 py-2 bg-blue-600 text-white rounded-r">Suivant</button>
