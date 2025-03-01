@@ -162,7 +162,8 @@ const statsValue = document.getElementById('stats-value');
 // Variables pour l'index
 let indexPage = 0;
 const itemsPerPage = 20; // Nombre d'items par page de l'index
-let allPossibleItems = [];
+let itemsGenerator = null; // Remplace allPossibleItems
+let currentPageItems = []; // Stocke les items de la page actuelle
 
 // Référence aux éléments DOM de l'index
 const indexModal = document.getElementById('index-modal');
@@ -175,36 +176,72 @@ const indexNextButton = document.getElementById('index-next');
 
 // Générer la liste complète des équipements possibles
 const generateAllPossibleItems = () => {
-  const allItems = [];
+  // Au lieu de générer tous les items, on calcule simplement le nombre total
+  let totalCount = 0;
 
   for (const type of equipmentData.equipmentTypes) {
     for (const name of equipmentData.namesByType[type]) {
       for (const rarity of equipmentData.rarities) {
         for (const quality of equipmentData.qualities) {
           for (let stars = 1; stars <= 11; stars++) {
-            // Créer un objet représentant chaque combinaison possible
-            const item = {
-              id: `${type}-${name}-${rarity}-${quality}-${stars}`,
-              name,
-              type,
-              rarity,
-              quality,
-              stars,
-              owned: false // Par défaut, non possédé
-            };
-            allItems.push(item);
+            totalCount++;
           }
         }
       }
     }
   }
 
-  return allItems;
+  return {
+    totalCount,
+    getItemsForPage: (page, itemsPerPage) => {
+      const start = page * itemsPerPage;
+      const end = start + itemsPerPage;
+      const items = [];
+      let currentIndex = 0;
+
+      // Parcourir toutes les combinaisons possibles mais ne créer que celles de la page actuelle
+      for (const type of equipmentData.equipmentTypes) {
+        for (const name of equipmentData.namesByType[type]) {
+          for (const rarity of equipmentData.rarities) {
+            for (const quality of equipmentData.qualities) {
+              for (let stars = 1; stars <= 11; stars++) {
+                // Ne créer l'objet que s'il est dans la plage de la page actuelle
+                if (currentIndex >= start && currentIndex < end) {
+                  const item = {
+                    id: `${type}-${name}-${rarity}-${quality}-${stars}`,
+                    name,
+                    type,
+                    rarity,
+                    quality,
+                    stars,
+                    owned: false // Par défaut, non possédé
+                  };
+                  items.push(item);
+                }
+
+                currentIndex++;
+                // Si on a dépassé la fin de la page, on peut arrêter
+                if (currentIndex >= end) {
+                  break;
+                }
+              }
+              if (currentIndex >= end) break;
+            }
+            if (currentIndex >= end) break;
+          }
+          if (currentIndex >= end) break;
+        }
+        if (currentIndex >= end) break;
+      }
+
+      return items;
+    }
+  };
 };
 
 // Vérifier si un item est dans l'inventaire
 const checkIfOwned = () => {
-  allPossibleItems.forEach(item => {
+  currentPageItems.forEach(item => {
     item.owned = inventory.some(invItem =>
       invItem.name === item.name &&
       invItem.type === item.type &&
@@ -219,11 +256,15 @@ const checkIfOwned = () => {
 const renderIndexPage = () => {
   indexGrid.innerHTML = '';
 
-  const start = indexPage * itemsPerPage;
-  const end = start + itemsPerPage;
-  const pageItems = allPossibleItems.slice(start, end);
+  // Obtenir les items pour la page actuelle
+  if (!itemsGenerator) {
+    itemsGenerator = generateAllPossibleItems();
+  }
 
-  pageItems.forEach(item => {
+  currentPageItems = itemsGenerator.getItemsForPage(indexPage, itemsPerPage);
+  checkIfOwned();
+
+  currentPageItems.forEach(item => {
     const itemDiv = document.createElement('div');
     itemDiv.className = `bg-gray-800 rounded p-3 flex flex-col items-center relative`;
 
@@ -251,7 +292,6 @@ const renderIndexPage = () => {
       itemDiv.appendChild(itemType);
       itemDiv.appendChild(itemDetails);
     } else {
-
       const itemName = document.createElement('div');
       itemName.className = `font-bold text-sm mb-1 text-center rarity-${(item.rarity).toLowerCase()} ${(item.rarity).toLowerCase()}-item`;
       itemName.style.color = rarityColors[item.rarity] || '#ffffff';
@@ -297,7 +337,7 @@ const renderIndexPage = () => {
   });
 
   // Mise à jour de la pagination
-  const totalPages = Math.ceil(allPossibleItems.length / itemsPerPage);
+  const totalPages = Math.ceil(itemsGenerator.totalCount / itemsPerPage);
   indexPagination.textContent = `Page ${indexPage + 1} / ${totalPages}`;
 
   // Activer/désactiver les boutons de navigation
@@ -307,13 +347,10 @@ const renderIndexPage = () => {
 
 // Ouvrir l'index
 const openIndex = () => {
-  // Si ce n'est pas déjà fait, générer tous les items possibles
-  if (allPossibleItems.length === 0) {
-    allPossibleItems = generateAllPossibleItems();
+  // Initialiser le générateur d'items si ce n'est pas déjà fait
+  if (!itemsGenerator) {
+    itemsGenerator = generateAllPossibleItems();
   }
-
-  // Vérifier quels items sont déjà dans l'inventaire
-  checkIfOwned();
 
   // Afficher la première page
   indexPage = 0;
@@ -338,7 +375,11 @@ const prevIndexPage = () => {
 
 // Page suivante de l'index
 const nextIndexPage = () => {
-  const totalPages = Math.ceil(allPossibleItems.length / itemsPerPage);
+  if (!itemsGenerator) {
+    itemsGenerator = generateAllPossibleItems();
+  }
+
+  const totalPages = Math.ceil(itemsGenerator.totalCount / itemsPerPage);
   if (indexPage < totalPages - 1) {
     indexPage++;
     renderIndexPage();
@@ -429,9 +470,9 @@ const generateEquipment = () => {
   updateUI();
 
   // Mettre à jour l'index si ouvert
-  if (!indexModal.classList.contains('hidden') && allPossibleItems.length > 0) {
-    checkIfOwned();
-    renderIndexPage();
+  if (!indexModal.classList.contains('hidden')) {
+    // Pas besoin de vérifier la longueur, puisque nous utilisons maintenant le générateur
+    renderIndexPage(); // Cette fonction appelle déjà checkIfOwned
   }
 };
 
@@ -652,7 +693,10 @@ const updateUI = () => {
   inventoryCounter.textContent = filteredInventory.length > 0 ? `${currentIndex + 1}/${filteredInventory.length}` : '0/0';
 
   // Mise à jour de l'info de progression
-  progressionInfo.textContent = `${inventory.length}/${totalPossibilities}`;
+  if (!itemsGenerator) {
+    itemsGenerator = generateAllPossibleItems();
+  }
+  progressionInfo.textContent = `${inventory.length}/${itemsGenerator.totalCount}`;
 
   // Activer/désactiver les boutons
   prevButton.disabled = currentIndex === 0 || filteredInventory.length === 0;
@@ -662,8 +706,7 @@ const updateUI = () => {
   updateStats();
 
   // Mise à jour de l'index si ouvert
-  if (!indexModal.classList.contains('hidden') && allPossibleItems.length > 0) {
-    checkIfOwned();
+  if (!indexModal.classList.contains('hidden')) {
     renderIndexPage();
   }
 
