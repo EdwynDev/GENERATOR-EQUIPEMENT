@@ -44,15 +44,15 @@ body {
 
 @keyframes borderPulse {
     0% {
-        text-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4);
+        border-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4);
     }
 
     70% {
-        text-shadow: 0 0 0 10px rgba(168, 85, 247, 0);
+        border-shadow: 0 0 0 10px rgba(168, 85, 247, 0);
     }
 
     100% {
-        text-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
+        border-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
     }
 }
 
@@ -121,7 +121,7 @@ h1.text-transparent {
 .divine-item,
 .éternel-item,
 .céleste-item {
-    animation: borderPulse 2s infinite;
+    animation: glowing 2s infinite;
 }
 
 /* Item card hover effects */
