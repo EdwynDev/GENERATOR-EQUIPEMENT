@@ -8,7 +8,8 @@ const rarityProbabilities = {
     'Mythique': 0.9, // 0.9%
     'Divin': 0.1, // 0.1%
     'Primordial': 0.05, // 0.05%
-    'Éternel': 0.01 // 0.01%
+    'Éternel': 0.01, // 0.01%
+    'Céleste': 0.0001 //0.0001%
 };
 
 // Probabilités pour les qualités
@@ -34,7 +35,8 @@ const starProbabilities = {
     7: 0.5, // 0.5%
     8: 0.1, // 0.1%
     9: 0.05, // 0.05%
-    10: 0.01 // 0.01%
+    10: 0.01, // 0.01%
+    11: 0.0001 // 0.0001%
 };
 
 // Couleurs des raretés
@@ -47,13 +49,14 @@ const rarityColors = {
     'Mythique': '#e01a6b', // Rose
     'Divin': '#f0d77a', // Or clair
     'Primordial': '#00ffff', // Cyan
-    'Éternel': '#ff00ff' // Magenta
+    'Éternel': '#ff00ff', // Magenta
+    'Céleste': '#280f3d' // 
 };
 
 // Fonction pour générer les données nécessaires
 function generateEquipmentData() {
     const equipmentTypes = ['Arme', 'Armure', 'Accessoire', 'Bouclier', 'Casque', 'Bottes', 'Gants', 'Ceinture', 'Jambières'];
-    const rarities = ['Commun', 'Peu_commun', 'Rare', 'Épique', 'Légendaire', 'Mythique', 'Divin', 'Primordial', 'Éternel'];
+    const rarities = ['Commun', 'Peu_commun', 'Rare', 'Épique', 'Légendaire', 'Mythique', 'Divin', 'Primordial', 'Éternel', 'Céleste'];
     const qualities = ['Endommagée', 'Normale', 'Supérieure', 'Avancée', 'Parfaite', 'Flamboyante', 'Divine', 'Immatérielle'];
 
     // Liste de noms possibles par type
@@ -99,7 +102,7 @@ function generateEquipmentData() {
     // Calculer le nombre total de combinaisons possibles
     const totalNames = Object.values(namesByType).reduce((sum, names) => sum + names.length, 0);
     const possibilityNames = totalNames / equipmentTypes.length;
-    const totalPossibilities = equipmentTypes.length * possibilityNames * rarities.length * qualities.length * 10;
+    const totalPossibilities = equipmentTypes.length * possibilityNames * rarities.length * qualities.length * 11;
 
     return {
         equipmentTypes,
@@ -218,7 +221,7 @@ const generateRandomEquipment = () => {
         rarity,
         quality,
         stars,
-        starColor: rarity === 'Divin' ? '#ffd700' : rarity === 'Mythique' ? '#e01a6b' : '#ffcc00',
+        starColor: rarity === 'Céleste' ? '#280f3d' : rarity === 'Divin' ? '#ffd700' : rarity === 'Mythique' ? '#e01a6b' : '#ffcc00',
         attack: type === 'Arme' ? Math.floor(10 * statMultiplier * qualityMultiplier) : undefined,
         defense: ['Armure', 'Bouclier', 'Casque'].includes(type) ? Math.floor(8 * statMultiplier * qualityMultiplier) : undefined,
         magic: ['Arme', 'Accessoire'].includes(type) ? Math.floor(6 * statMultiplier * qualityMultiplier) : undefined,
