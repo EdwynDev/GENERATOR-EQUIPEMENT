@@ -567,7 +567,6 @@ document.getElementById('next-page').addEventListener('click', () => {
     const filteredInventory = getFilteredInventory();
     if (currentPage < Math.ceil(filteredInventory.length / itemsPerPage)) {
         currentPage++;
-        renderInventoryGrid();
     }
 });
 
@@ -575,5 +574,4 @@ document.getElementById('next-page').addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     feather.replace();
     generateEquipment();
-    renderInventoryGrid();
 });
