@@ -112,8 +112,15 @@ h1.text-transparent {
     text-shadow: 0 0 15px rgba(255, 0, 255, 0.8);
 }
 
+.rarity-céleste {
+    color: #280f3d;
+    text-shadow: 0 0 15px rgba(65, 30, 94, 0.8);
+}
+
 /* Special effect for divine items */
-.divine-item {
+.divine-item,
+.éternel-item,
+.céleste-item {
     animation: borderPulse 2s infinite;
 }
 
