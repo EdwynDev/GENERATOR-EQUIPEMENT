@@ -368,7 +368,7 @@ const renderEquipment = (equipment) => {
 
     // Afficher les étoiles
     for (let i = 0; i < equipment.stars; i++) {
-        html += `<span style="color: ${equipment.starColor}">★</span>`;
+        html += `<span style="color: ${equipment.starColor}" class="${(equipment.rarity).toLowerCase()}-item">★</span>`;
     }
     for (let i = equipment.stars; i < 11; i++) {
         html += `<span class="text-gray-600">★</span>`;
