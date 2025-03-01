@@ -120,8 +120,9 @@ h1.text-transparent {
 /* Special effect for divine items */
 .divine-item,
 .éternel-item,
+.primordial-item,
 .céleste-item {
-    animation: borderPulse 2s infinite;
+    animation: glowing 2s infinite;
 }
 
 /* Item card hover effects */
