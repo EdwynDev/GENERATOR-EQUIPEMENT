@@ -151,8 +151,6 @@ const progressionInfo = document.getElementById('progression-info');
 const prevButton = document.getElementById('prev-button');
 const nextButton = document.getElementById('next-button');
 const generateButton = document.getElementById('generate-button');
-const deleteButton = document.getElementById('delete-button');
-const exportButton = document.getElementById('export-button');
 const searchInput = document.getElementById('search-input');
 const typeFilter = document.getElementById('type-filter');
 const rarityFilter = document.getElementById('rarity-filter');
@@ -161,8 +159,6 @@ const statsCount = document.getElementById('stats-count');
 const statsTypes = document.getElementById('stats-types');
 const statsRarities = document.getElementById('stats-rarities');
 const statsValue = document.getElementById('stats-value');
-let currentPage = 1;
-const itemsPerPage = 8;
 
 function renderInventoryGrid() {
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -295,33 +291,6 @@ const goToNext = () => {
         currentIndex++;
         updateUI();
     }
-};
-
-// Supprimer l'équipement actuel
-const deleteCurrentEquipment = () => {
-    if (inventory.length === 0) return;
-
-    const filteredInventory = getFilteredInventory();
-    const itemToRemove = filteredInventory[currentIndex];
-    inventory = inventory.filter(item => item.id !== itemToRemove.id);
-
-    if (currentIndex >= getFilteredInventory().length) {
-        currentIndex = Math.max(0, getFilteredInventory().length - 1);
-    }
-
-    localStorage.setItem('inventory', JSON.stringify(inventory));
-    updateUI();
-};
-
-// Exporter l'inventaire en JSON
-const exportInventory = () => {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(inventory, null, 2));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "equipment_inventory.json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
 };
 
 // Réinitialiser les filtres
@@ -534,8 +503,6 @@ const updateUI = () => {
 generateButton.addEventListener('click', generateEquipment);
 prevButton.addEventListener('click', goToPrevious);
 nextButton.addEventListener('click', goToNext);
-deleteButton.addEventListener('click', deleteCurrentEquipment);
-exportButton.addEventListener('click', exportInventory);
 resetFiltersButton.addEventListener('click', resetFilters);
 
 searchInput.addEventListener('input', (e) => {
@@ -554,20 +521,6 @@ rarityFilter.addEventListener('change', (e) => {
     filterRarity = e.target.value;
     currentIndex = 0;
     updateUI();
-});
-
-document.getElementById('prev-page').addEventListener('click', () => {
-    if (currentPage > 1) {
-        currentPage--;
-        renderInventoryGrid();
-    }
-});
-
-document.getElementById('next-page').addEventListener('click', () => {
-    const filteredInventory = getFilteredInventory();
-    if (currentPage < Math.ceil(filteredInventory.length / itemsPerPage)) {
-        currentPage++;
-    }
 });
 
 // Initialisation
