@@ -709,7 +709,7 @@ const renderEquipment = (equipment) => {
   }
 
   // Obtenir l'URL de l'image
-  const imageUrl = equipmentImages[equipment.name] || fallbackImages[equipment.type] || fallbackImages['default'];
+  const imageUrl = /*equipmentImages[equipment.name] || fallbackImages[equipment.type] ||*/ fallbackImages['default'];
 
 
   let html = `
