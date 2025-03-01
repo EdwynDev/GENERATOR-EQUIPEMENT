@@ -53,6 +53,145 @@ const rarityColors = {
   'Céleste': '#280f3d' // 
 };
 
+// Images des équipements par nom
+const equipmentImages = {
+  // Armes
+  'Épée du chaos': '/assets/images/weapons/epee-chaos.png',
+  'Hache du dragon': '/assets/images/weapons/hache-dragon.png',
+  'Dague de l\'ombre': '/assets/images/weapons/dague-ombre.png',
+  'Arc céleste': '/assets/images/weapons/arc-celeste.png',
+  'Marteau de guerre': '/assets/images/weapons/marteau-guerre.png',
+  'Lame sanguinaire': '/assets/images/weapons/lame-sanguinaire.png',
+  'Glaive de lumière': '/assets/images/weapons/glaive-lumiere.png',
+  'Faux de l\'apocalypse': '/assets/images/weapons/faux-apocalypse.png',
+  'Épée longue de l\'éclipse': '/assets/images/weapons/epee-eclipse.png',
+  'Lance du phénix': '/assets/images/weapons/lance-phenix.png',
+
+  // Armures
+  'Cuirasse de fer': '/assets/images/armors/cuirasse-fer.png',
+  'Robe mystique': '/assets/images/armors/robe-mystique.png',
+  'Armure d\'écailles': '/assets/images/armors/armure-ecailles.png',
+  'Plastron du chevalier': '/assets/images/armors/plastron-chevalier.png',
+  'Manteau résistant': '/assets/images/armors/manteau-resistant.png',
+  'Armure de la bête': '/assets/images/armors/armure-bete.png',
+  'Tunique de l\'errant': '/assets/images/armors/tunique-errant.png',
+  'Harnais de glace': '/assets/images/armors/harnais-glace.png',
+  'Plastron en adamantium': '/assets/images/armors/plastron-adamantium.png',
+  'Cape des ombres': '/assets/images/armors/cape-ombres.png',
+
+  // Accessoires
+  'Anneau de force': '/assets/images/accessories/anneau-force.png',
+  'Bracelet du mage': '/assets/images/accessories/bracelet-mage.png',
+  'Pendentif de vitalité': '/assets/images/accessories/pendentif-vitalite.png',
+  'Charme ancien': '/assets/images/accessories/charme-ancien.png',
+  'Amulette runique': '/assets/images/accessories/amulette-runique.png',
+  'Anneau de givre': '/assets/images/accessories/anneau-givre.png',
+  'Collier de la licorne': '/assets/images/accessories/collier-licorne.png',
+  'Bague de feu': '/assets/images/accessories/bague-feu.png',
+  'Pendentif de l\'étoile': '/assets/images/accessories/pendentif-etoile.png',
+  'Bracelet de l\'infini': '/assets/images/accessories/bracelet-infini.png',
+
+  // Boucliers
+  'Rempart infernal': '/assets/images/shields/rempart-infernal.png',
+  'Écu du gardien': '/assets/images/shields/ecu-gardien.png',
+  'Bouclier de cristal': '/assets/images/shields/bouclier-cristal.png',
+  'Barrière magique': '/assets/images/shields/barriere-magique.png',
+  'Défense royale': '/assets/images/shields/defense-royale.png',
+  'Bouclier de l\'aube': '/assets/images/shields/bouclier-aube.png',
+  'Pavois de pierre': '/assets/images/shields/pavois-pierre.png',
+  'Bouclier de l\'abysse': '/assets/images/shields/bouclier-abysse.png',
+  'Égide de l\'immortel': '/assets/images/shields/egide-immortel.png',
+  'Bouclier du titan': '/assets/images/shields/bouclier-titan.png',
+
+  // Casques
+  'Heaume du champion': '/assets/images/helmets/heaume-champion.png',
+  'Couronne de sagesse': '/assets/images/helmets/couronne-sagesse.png',
+  'Casque d\'acier': '/assets/images/helmets/casque-acier.png',
+  'Capuche d\'assassin': '/assets/images/helmets/capuche-assassin.png',
+  'Visière ancestrale': '/assets/images/helmets/visiere-ancestrale.png',
+  'Casque du berserker': '/assets/images/helmets/casque-berserker.png',
+  'Masque de la bête': '/assets/images/helmets/masque-bete.png',
+  'Heaume de la tempête': '/assets/images/helmets/heaume-tempete.png',
+  'Couronne de glace': '/assets/images/helmets/couronne-glace.png',
+  'Casque du dragon': '/assets/images/helmets/casque-dragon.png',
+
+  // Autres types d'équipement...
+  // Bottes
+  'Bottes de vitesse': '/assets/images/boots/bottes-vitesse.png',
+  'Bottes de furtivité': '/assets/images/boots/bottes-furtivite.png',
+  'Bottes de l\'explorateur': '/assets/images/boots/bottes-explorateur.png',
+  'Bottes de feu': '/assets/images/boots/bottes-feu.png',
+  'Bottes de givre': '/assets/images/boots/bottes-givre.png',
+  'Bottes de l\'ombre': '/assets/images/boots/bottes-ombre.png',
+  'Bottes de la montagne': '/assets/images/boots/bottes-montagne.png',
+  'Bottes du vent': '/assets/images/boots/bottes-vent.png',
+  'Bottes de l\'enfer': '/assets/images/boots/bottes-enfer.png',
+  'Bottes célestes': '/assets/images/boots/bottes-celestes.png',
+
+  // Gants
+  'Gants de force': '/assets/images/gloves/gants-force.png',
+  'Gants de précision': '/assets/images/gloves/gants-precision.png',
+  'Gants de l\'artisan': '/assets/images/gloves/gants-artisan.png',
+  'Gants de foudre': '/assets/images/gloves/gants-foudre.png',
+  'Gants de glace': '/assets/images/gloves/gants-glace.png',
+  'Gants de l\'assassin': '/assets/images/gloves/gants-assassin.png',
+  'Gants du berserker': '/assets/images/gloves/gants-berserker.png',
+  'Gants de l\'éclipse': '/assets/images/gloves/gants-eclipse.png',
+  'Gants du dragon': '/assets/images/gloves/gants-dragon.png',
+  'Gants de l\'infini': '/assets/images/gloves/gants-infini.png',
+
+  // Ceintures
+  'Ceinture de puissance': '/assets/images/belts/ceinture-puissance.png',
+  'Ceinture de résistance': '/assets/images/belts/ceinture-resistance.png',
+  'Ceinture de l\'alchimiste': '/assets/images/belts/ceinture-alchimiste.png',
+  'Ceinture de feu': '/assets/images/belts/ceinture-feu.png',
+  'Ceinture de givre': '/assets/images/belts/ceinture-givre.png',
+  'Ceinture de l\'ombre': '/assets/images/belts/ceinture-ombre.png',
+  'Ceinture de la montagne': '/assets/images/belts/ceinture-montagne.png',
+  'Ceinture du vent': '/assets/images/belts/ceinture-vent.png',
+  'Ceinture de l\'enfer': '/assets/images/belts/ceinture-enfer.png',
+  'Ceinture céleste': '/assets/images/belts/ceinture-celeste.png',
+
+  // Jambières
+  'Jambières de fer': '/assets/images/legs/jambieres-fer.png',
+  'Jambières de cuir': '/assets/images/legs/jambieres-cuir.png',
+  'Jambières de l\'explorateur': '/assets/images/legs/jambieres-explorateur.png',
+  'Jambières de feu': '/assets/images/legs/jambieres-feu.png',
+  'Jambières de givre': '/assets/images/legs/jambieres-givre.png',
+  'Jambières de l\'ombre': '/assets/images/legs/jambieres-ombre.png',
+  'Jambières de la montagne': '/assets/images/legs/jambieres-montagne.png',
+  'Jambières du vent': '/assets/images/legs/jambieres-vent.png',
+  'Jambières de l\'enfer': '/assets/images/legs/jambieres-enfer.png',
+  'Jambières célestes': '/assets/images/legs/jambieres-celestes.png',
+
+  // Pouvoirs
+  'Manipulation Feu': '/assets/images/powers/manipulation-feu.png',
+  'Manipulation Eau': '/assets/images/powers/manipulation-eau.png',
+  'Manipulation Terre': '/assets/images/powers/manipulation-terre.png',
+  'Manipulation Air': '/assets/images/powers/manipulation-air.png',
+  'Manipulation Lumière': '/assets/images/powers/manipulation-lumiere.png',
+  'Manipulation Ténèbres': '/assets/images/powers/manipulation-tenebres.png',
+  'Manipulation Trou Noir': '/assets/images/powers/manipulation-trou-noir.png',
+  'Manipulation du Temps': '/assets/images/powers/manipulation-temps.png',
+  'Invocation des Ombres': '/assets/images/powers/invocation-ombres.png',
+  'Transformation en Titan': '/assets/images/powers/transformation-titan.png',
+};
+
+// Image de secours si l'image spécifique n'est pas trouvée
+const fallbackImages = {
+  'Arme': '/assets/images/default/default-weapon.png',
+  'Armure': '/assets/images/default/default-armor.png',
+  'Accessoire': '/assets/images/default/default-accessory.png',
+  'Bouclier': '/assets/images/default/default-shield.png',
+  'Casque': '/assets/images/default/default-helmet.png',
+  'Bottes': '/assets/images/default/default-boots.png',
+  'Gants': '/assets/images/default/default-gloves.png',
+  'Ceinture': '/assets/images/default/default-belt.png',
+  'Jambières': '/assets/images/default/default-legs.png',
+  'Pouvoir': '/assets/images/default/default-power.png',
+  'default': '/assets/images/default/default-item.png'
+};
+
 // Fonction pour générer les données nécessaires
 function generateEquipmentData() {
   const equipmentTypes = ['Arme', 'Armure', 'Accessoire', 'Bouclier', 'Casque', 'Bottes', 'Gants', 'Ceinture', 'Jambières', 'Pouvoir'];
@@ -274,6 +413,14 @@ const renderIndexPage = () => {
       lockIcon.className = 'absolute top-2 right-2 text-gray-400';
       lockIcon.innerHTML = feather.icons.lock.toSvg({ width: 16, height: 16 });
       itemDiv.appendChild(lockIcon);
+      // Obtenir l'URL de l'image
+      const imageUrl = fallbackImages['default'];
+
+      // Ajouter l'image
+      const itemImage = document.createElement('div');
+      itemImage.className = 'w-12 h-12 mb-2';
+      itemImage.innerHTML = `<img src="${imageUrl}" alt="${item.name}" class="glowing-image-${(item.rarity).toLowerCase()} w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+      itemDiv.appendChild(itemImage);
 
       const itemName = document.createElement('div');
       itemName.className = `font-bold text-sm mb-1 text-center rarity-${(item.rarity).toLowerCase()} ${(item.rarity).toLowerCase()}-item`;
@@ -288,10 +435,42 @@ const renderIndexPage = () => {
       itemDetails.className = 'text-xs text-gray-300 mb-1';
       itemDetails.textContent = `??? • ???`;
 
+      const itemStars = document.createElement('div');
+      itemStars.className = 'text-xs';
+      const starColor = item.rarity === 'Céleste' ? '#280f3d' :
+        item.rarity === 'Divin' ? '#ffd700' :
+          item.rarity === 'Mythique' ? '#e01a6b' :
+            '#ffcc00';
+
+      for (let i = 0; i < item.stars; i++) {
+        const star = document.createElement('span');
+        star.className = `rarity-${(item.rarity).toLowerCase()} ${(item.rarity).toLowerCase()}-item`
+        star.style.color = starColor;
+        star.textContent = '★';
+        itemStars.appendChild(star);
+      }
+
+      for (let i = item.stars; i < 11; i++) {
+        const star = document.createElement('span');
+        star.className = 'text-gray-600';
+        star.textContent = '★';
+        itemStars.appendChild(star);
+      }
+
       itemDiv.appendChild(itemName);
       itemDiv.appendChild(itemType);
       itemDiv.appendChild(itemDetails);
+      itemDiv.appendChild(itemStars);
     } else {
+      // Obtenir l'URL de l'image
+      const imageUrl = equipmentImages[item.name] || fallbackImages[item.type] || fallbackImages['default'];
+
+      // Ajouter l'image
+      const itemImage = document.createElement('div');
+      itemImage.className = 'w-12 h-12 mb-2';
+      itemImage.innerHTML = `<img src="${imageUrl}" alt="${item.name}" class="glowing-image-${(item.rarity).toLowerCase()} w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+      itemDiv.appendChild(itemImage);
+
       const itemName = document.createElement('div');
       itemName.className = `font-bold text-sm mb-1 text-center rarity-${(item.rarity).toLowerCase()} ${(item.rarity).toLowerCase()}-item`;
       itemName.style.color = rarityColors[item.rarity] || '#ffffff';
@@ -529,9 +708,16 @@ const renderEquipment = (equipment) => {
     return;
   }
 
+  // Obtenir l'URL de l'image
+  const imageUrl = equipmentImages[equipment.name] || fallbackImages[equipment.type] || fallbackImages['default'];
+
+
   let html = `
         <div class="p-6 bg-gray-800 rounded-lg shadow-lg">
           <div class="flex flex-col items-center mb-4">
+            <div class="mr-4">
+              <img src="${imageUrl}" alt="${equipment.name}" class="glowing-image-${(equipment.rarity).toLowerCase()} w-24 h-24 object-contain rounded" onerror="this.src='${fallbackImages['default']}';">
+            </div>
             <h2 
               class="text-2xl font-bold mb-1 rarity-${(equipment.rarity).toLowerCase()} ${(equipment.rarity).toLowerCase()}-item"
               style="color: ${rarityColors[equipment.rarity] || '#ffffff'}"
