@@ -121,7 +121,7 @@ h1.text-transparent {
 .divine-item,
 .éternel-item,
 .céleste-item {
-    animation: glowing 2s infinite;
+    animation: borderPulse 2s infinite;
 }
 
 /* Item card hover effects */
