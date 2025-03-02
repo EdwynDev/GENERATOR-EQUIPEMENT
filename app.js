@@ -293,6 +293,13 @@ let currentIndex = 0;
 let filter = '';
 let filterType = '';
 let filterRarity = '';
+let filterPower = '';
+let filterValue = '';
+let filterAttack = '';
+let filterDefense = '';
+let filterMagic = '';
+let filterCritChance = '';
+let sortOrder = 'asc'; // 'asc' pour croissant, 'desc' pour décroissant
 const equipmentDisplay = document.getElementById('equipment-display');
 const inventoryCounter = document.getElementById('inventory-counter');
 const progressionInfo = document.getElementById('progression-info');
@@ -307,6 +314,12 @@ const statsCount = document.getElementById('stats-count');
 const statsTypes = document.getElementById('stats-types');
 const statsRarities = document.getElementById('stats-rarities');
 const statsValue = document.getElementById('stats-value');
+const powerFilter = document.getElementById('power-filter');
+const valueFilter = document.getElementById('value-filter');
+const attackFilter = document.getElementById('attack-filter');
+const defenseFilter = document.getElementById('defense-filter');
+const magicFilter = document.getElementById('magic-filter');
+const critChanceFilter = document.getElementById('crit-chance-filter');
 
 
 
@@ -321,6 +334,37 @@ const indexGrid = document.getElementById('index-grid');
 const indexPagination = document.getElementById('index-pagination');
 const indexPrevButton = document.getElementById('index-prev');
 const indexNextButton = document.getElementById('index-next');
+const sortInventoryByPower = (inventory, order) => {
+  return inventory.sort((a, b) => {
+    if (order === 'asc') {
+      return a.powerScore - b.powerScore; // Tri croissant
+    } else {
+      return b.powerScore - a.powerScore; // Tri décroissant
+    }
+  });
+};
+const sortByPowerButton = document.getElementById('sort-by-power');
+
+sortByPowerButton.addEventListener('click', () => {
+  // Inverse l'ordre de tri
+  sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+
+  // Trie l'inventaire
+  inventory = sortInventoryByPower(inventory, sortOrder);
+
+  // Met à jour l'interface utilisateur
+  currentIndex = 0;
+  updateUI();
+
+  // Change le texte du bouton pour indiquer l'ordre actuel
+  sortByPowerButton.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+        </svg>
+        Trier par puissance (${sortOrder === 'asc' ? 'croissant' : 'décroissant'})
+    `;
+});
 
 const generateAllPossibleItems = () => {
   let totalCount = 0;
@@ -762,12 +806,22 @@ const generateEquipment = () => {
 };
 
 const getFilteredInventory = () => {
-  return inventory.filter(item => {
+  let filtered = inventory.filter(item => {
     const nameMatch = item.name.toLowerCase().includes(filter.toLowerCase());
     const typeMatch = filterType ? item.type === filterType : true;
     const rarityMatch = filterRarity ? item.rarity === filterRarity : true;
-    return nameMatch && typeMatch && rarityMatch;
+    const powerMatch = filterPower ? item.powerScore >= filterPower : true;
+    const valueMatch = filterValue ? item.sellValue >= filterValue : true;
+    const attackMatch = filterAttack ? item.attack >= filterAttack : true;
+    const defenseMatch = filterDefense ? item.defense >= filterDefense : true;
+    const magicMatch = filterMagic ? item.magic >= filterMagic : true;
+    const critChanceMatch = filterCritChance ? item.critChance >= filterCritChance : true;
+
+    return nameMatch && typeMatch && rarityMatch && powerMatch && valueMatch && attackMatch && defenseMatch && magicMatch && critChanceMatch;
   });
+
+  // Applique le tri par puissance
+  return sortInventoryByPower(filtered, sortOrder);
 };
 
 const goToPrevious = () => {
@@ -789,9 +843,33 @@ const resetFilters = () => {
   filter = '';
   filterType = '';
   filterRarity = '';
+  filterPower = '';
+  filterValue = '';
+  filterAttack = '';
+  filterDefense = '';
+  filterMagic = '';
+  filterCritChance = '';
+  sortOrder = 'asc'; // Réinitialise l'ordre de tri
+
   searchInput.value = '';
   typeFilter.value = '';
   rarityFilter.value = '';
+  powerFilter.value = '';
+  valueFilter.value = '';
+  attackFilter.value = '';
+  defenseFilter.value = '';
+  magicFilter.value = '';
+  critChanceFilter.value = '';
+
+  // Met à jour le texte du bouton de tri
+  sortByPowerButton.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+      </svg>
+      Trier par puissance (croissant)
+  `;
+
   currentIndex = 0;
   updateUI();
 };
@@ -1053,6 +1131,41 @@ closeIndexButton.addEventListener('click', closeIndex);
 indexPrevButton.addEventListener('click', prevIndexPage);
 indexNextButton.addEventListener('click', nextIndexPage);
 
+powerFilter.addEventListener('input', (e) => {
+  filterPower = e.target.value ? parseInt(e.target.value) : '';
+  currentIndex = 0;
+  updateUI();
+});
+
+valueFilter.addEventListener('input', (e) => {
+  filterValue = e.target.value ? parseInt(e.target.value) : '';
+  currentIndex = 0;
+  updateUI();
+});
+
+attackFilter.addEventListener('input', (e) => {
+  filterAttack = e.target.value ? parseInt(e.target.value) : '';
+  currentIndex = 0;
+  updateUI();
+});
+
+defenseFilter.addEventListener('input', (e) => {
+  filterDefense = e.target.value ? parseInt(e.target.value) : '';
+  currentIndex = 0;
+  updateUI();
+});
+
+magicFilter.addEventListener('input', (e) => {
+  filterMagic = e.target.value ? parseInt(e.target.value) : '';
+  currentIndex = 0;
+  updateUI();
+});
+
+critChanceFilter.addEventListener('input', (e) => {
+  filterCritChance = e.target.value ? parseInt(e.target.value) : '';
+  currentIndex = 0;
+  updateUI();
+});
 searchInput.addEventListener('input', (e) => {
   filter = e.target.value;
   currentIndex = 0;
