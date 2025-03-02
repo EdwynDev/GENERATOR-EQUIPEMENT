@@ -461,7 +461,7 @@ const renderIndexPage = () => {
       itemDiv.appendChild(itemStars);
     } else {
       // Obtenir l'URL de l'image
-      const imageUrl = equipmentImages[item.name] || fallbackImages[item.type];
+      const imageUrl = /*equipmentImages[item.name] ||*/ fallbackImages[item.type];
 
       // Ajouter l'image
       const itemImage = document.createElement('div');
@@ -707,8 +707,7 @@ const renderEquipment = (equipment) => {
   }
 
   // Obtenir l'URL de l'image
-  const imageUrl = equipmentImages[equipment.name] || fallbackImages[equipment.type] || fallbackImages['default'];
-
+  const imageUrl = /*equipmentImages[equipment.name] ||*/ fallbackImages[equipment.type];
 
   let html = `
         <div class="p-6 bg-gray-800 rounded-lg shadow-lg">
