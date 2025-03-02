@@ -413,6 +413,68 @@ const renderIndexPage = () => {
       itemDiv.appendChild(lockIcon);
       // Obtenir l'URL de l'image
       const imageUrl = fallbackImages[item.type];
+      let itemBGROTATE;
+      let imageRotate;
+      if (item.rarity === 'Mythique') {
+        imageRotate = '/assets/bg-icons/rotateBG.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+      } else if (item.rarity === 'Divin') {
+        imageRotate = '/assets/bg-icons/rotateBG2.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+      } else if (item.rarity === 'Primordial') {
+        imageRotate = '/assets/bg-icons/rotateBG3.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+      } else if (item.rarity === 'Éternel') {
+        imageRotate = '/assets/bg-icons/rotateBG4.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+      } else if (item.rarity === 'Céleste') {
+        imageRotate = '/assets/bg-icons/rotateBG.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG2.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-14 h-14 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG3.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-12 h-12 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG4.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-10 h-10 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG5.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-8 h-8 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+      }
 
       // Ajouter l'image
       const itemImage = document.createElement('div');
@@ -462,6 +524,68 @@ const renderIndexPage = () => {
     } else {
       // Obtenir l'URL de l'image
       const imageUrl = /*equipmentImages[item.name] ||*/ fallbackImages[item.type];
+      let itemBGROTATE;
+      let imageRotate;
+      if (item.rarity === 'Mythique') {
+        imageRotate = '/assets/bg-icons/rotateBG.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+      } else if (item.rarity === 'Divin') {
+        imageRotate = '/assets/bg-icons/rotateBG2.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+      } else if (item.rarity === 'Primordial') {
+        imageRotate = '/assets/bg-icons/rotateBG3.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+      } else if (item.rarity === 'Éternel') {
+        imageRotate = '/assets/bg-icons/rotateBG4.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+      } else if (item.rarity === 'Céleste') {
+        imageRotate = '/assets/bg-icons/rotateBG.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG2.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-14 h-14 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG3.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-12 h-12 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG4.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-10 h-10 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG5.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-8 h-8 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+      }
 
       // Ajouter l'image
       const itemImage = document.createElement('div');
@@ -708,12 +832,69 @@ const renderEquipment = (equipment) => {
 
   // Obtenir l'URL de l'image
   const imageUrl = /*equipmentImages[equipment.name] ||*/ fallbackImages[equipment.type];
+  let imageRotate = '';
 
-  let html = `
-        <div class="p-6 mt-12 bg-gray-800 rounded-lg shadow-lg relative" style="z-index:1;">
-            <div class="ml-4 absolute bg-gray-800 p-6" style="border-radius:50%; top:-30px;right:-30px; z-index:-1;">
-              <img src="${imageUrl}" alt="${equipment.name}" class="glowing-image-${(equipment.rarity).toLowerCase()} w-24 h-24 object-contain rounded" onerror="this.src='${fallbackImages['default']}';">
-            </div>
+  let html = `<div class="p-6 mt-12 bg-gray-800 rounded-lg shadow-lg relative" style="z-index:1;">`
+  if (equipment.rarity == 'Mythique') {
+    imageRotate = '/assets/bg-icons/rotateBG.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-40 h-40 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+  } else if (equipment.rarity == 'Divin') {
+    imageRotate = '/assets/bg-icons/rotateBG2.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-40 h-40 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+  } else if (equipment.rarity == 'Primordial') {
+    imageRotate = '/assets/bg-icons/rotateBG3.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-40 h-40 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+  } else if (equipment.rarity == 'Éternel') {
+    imageRotate = '/assets/bg-icons/rotateBG4.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-40 h-40 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+  } else if (equipment.rarity == 'Céleste') {
+    imageRotate = '/assets/bg-icons/rotateBG.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-40 h-40 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+    imageRotate = '/assets/bg-icons/rotateBG2.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-36 h-36 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+    imageRotate = '/assets/bg-icons/rotateBG3.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-32 h-32 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+    imageRotate = '/assets/bg-icons/rotateBG4.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-28 h-28 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+    imageRotate = '/assets/bg-icons/rotateBG5.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-24 h-24 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+  } else {
+    html += ` <div class="ml-4 absolute bg-gray-800 p-6" style="border-radius:50%; top:-30px; right:-30px;">
+                <img src="${imageUrl}" alt="${equipment.name}" class="w-24 h-24 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+  }
+  html += `
+          <div class="ml-4 absolute p-6" style="border-radius:50%; top:-30px; right:-30px;">
+            <img src="${imageUrl}" alt="${equipment.name}" class="glowing-image-${(equipment.rarity).toLowerCase()} w-24 h-24 object-contain" onerror="this.src='${fallbackImages['default']}';">
+          </div>
           <div class="flex flex-col items-left mb-4">
             <h2 
               class="text-2xl font-bold mb-1 rarity-${(equipment.rarity).toLowerCase()} ${(equipment.rarity).toLowerCase()}-item"
