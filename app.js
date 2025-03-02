@@ -26,7 +26,8 @@ const rarityProbabilities = {
   'Divin': 0.1, // 0.1%
   'Primordial': 0.05, // 0.05%
   'Éternel': 0.01, // 0.01%
-  'Céleste': 0.0001 //0.0001%
+  'Céleste': 0.0001, //0.0001%
+  'Interstellaire': 0.00001 //0.00001%
 };
 
 const qualityProbabilities = {
@@ -73,7 +74,8 @@ const rarityColors = {
   'Divin': '#f0d77a', // Or clair
   'Primordial': '#00ffff', // Cyan
   'Éternel': '#ff00ff', // Magenta
-  'Céleste': '#280f3d' // Violet-Noir
+  'Céleste': '#280f3d', // Violet-Noir
+  'Interstellaire': '#000000' // Noir
 };
 
 const equipmentImages = {
@@ -213,7 +215,7 @@ const fallbackImages = {
 
 function generateEquipmentData() {
   const equipmentTypes = ['Arme', 'Armure', 'Accessoire', 'Bouclier', 'Casque', 'Bottes', 'Gants', 'Ceinture', 'Jambières', 'Pouvoir'];
-  const rarities = ['Commun', 'Peu_commun', 'Rare', 'Épique', 'Légendaire', 'Mythique', 'Divin', 'Primordial', 'Éternel', 'Céleste'];
+  const rarities = ['Commun', 'Peu_commun', 'Rare', 'Épique', 'Légendaire', 'Mythique', 'Divin', 'Primordial', 'Éternel', 'Céleste', 'Interstellaire'];
   const qualities = ['Endommagée', 'Normale', 'Supérieure', 'Avancée', 'Parfaite', 'Flamboyante', 'Divine', 'Immatérielle'];
 
   const namesByType = {
@@ -447,7 +449,7 @@ const renderIndexPage = () => {
 
   currentPageItems = itemsGenerator.getItemsForPage(indexPage, itemsPerPage);
   checkIfOwned();
-  const valideRarity = ['Mythique', 'Divin', 'Primordial', 'Éternel', 'Céleste'];
+  const valideRarity = ['Mythique', 'Divin', 'Primordial', 'Éternel', 'Céleste', 'Interstellaire'];
 
   currentPageItems.forEach(item => {
     const itemDiv = document.createElement('div');
@@ -520,6 +522,37 @@ const renderIndexPage = () => {
         itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
         itemDiv.appendChild(itemBGROTATE);
         imageRotate = '/assets/bg-icons/rotateBG5.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-8 h-8 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+      } else if (item.rarity === 'Interstellaire') {
+        imageRotate = '/assets/bg-icons/rotateBG5.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG4.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-14 h-14 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG3.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-12 h-12 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG2.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-10 h-10 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG.png';
         itemBGROTATE = document.createElement('div');
         itemBGROTATE.className = 'w-8 h-8 mb-2 absolute';
         itemBGROTATE.style = 'top:0;'
@@ -632,6 +665,37 @@ const renderIndexPage = () => {
         itemBGROTATE.style = 'top:0;'
         itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
         itemDiv.appendChild(itemBGROTATE);
+      } else if (item.rarity === 'Interstellaire') {
+        imageRotate = '/assets/bg-icons/rotateBG5.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-16 h-16 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG4.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-14 h-14 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG3.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-12 h-12 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG2.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-10 h-10 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
+        imageRotate = '/assets/bg-icons/rotateBG.png';
+        itemBGROTATE = document.createElement('div');
+        itemBGROTATE.className = 'w-8 h-8 mb-2 absolute';
+        itemBGROTATE.style = 'top:0;'
+        itemBGROTATE.innerHTML = `<img src="${imageRotate}" alt="${item.name}" class="celeste-rarity w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
+        itemDiv.appendChild(itemBGROTATE);
       }
 
       const itemImage = document.createElement('div');
@@ -654,7 +718,7 @@ const renderIndexPage = () => {
 
       const itemStars = document.createElement('div');
       itemStars.className = 'text-xs';
-      const starColor = item.rarity === 'Primordial' ? '#00ffff' : item.rarity === 'Éternel' ? '#ff00ff' : item.rarity === 'Céleste' ? '#280f3d' : item.rarity === 'Divin' ? '#ffd700' : item.rarity === 'Mythique' ? '#e01a6b' : '#ffcc00'
+      const starColor = item.rarity === 'Interstellaire' ? '#000000' : item.rarity === 'Primordial' ? '#00ffff' : item.rarity === 'Éternel' ? '#ff00ff' : item.rarity === 'Céleste' ? '#280f3d' : item.rarity === 'Divin' ? '#ffd700' : item.rarity === 'Mythique' ? '#e01a6b' : '#ffcc00'
 
       for (let i = 0; i < item.stars; i++) {
         const star = document.createElement('span');
@@ -756,7 +820,7 @@ const generateRandomEquipment = () => {
     rarity,
     quality,
     stars,
-    starColor: rarity === 'Primordial' ? '#00ffff' : rarity === 'Éternel' ? '#ff00ff' : rarity === 'Céleste' ? '#280f3d' : rarity === 'Divin' ? '#ffd700' : rarity === 'Mythique' ? '#e01a6b' : '#ffcc00',
+    starColor: rarity === 'Interstellaire' ? '#000000' : rarity === 'Primordial' ? '#00ffff' : rarity === 'Éternel' ? '#ff00ff' : rarity === 'Céleste' ? '#280f3d' : rarity === 'Divin' ? '#ffd700' : rarity === 'Mythique' ? '#e01a6b' : '#ffcc00',
     attack: type === 'Arme' ? Math.floor(10 * statMultiplier * qualityMultiplier) : undefined,
     defense: ['Armure', 'Bouclier', 'Casque'].includes(type) ? Math.floor(8 * statMultiplier * qualityMultiplier) : undefined,
     magic: ['Arme', 'Accessoire'].includes(type) ? Math.floor(6 * statMultiplier * qualityMultiplier) : undefined,
@@ -889,7 +953,7 @@ const renderEquipment = (equipment) => {
 
   const imageUrl = /*equipmentImages[equipment.name] ||*/ fallbackImages[equipment.type];
   let imageRotate = '';
-  const valideRarity = ['Mythique', 'Divin', 'Primordial', 'Éternel', 'Céleste'];
+  const valideRarity = ['Mythique', 'Divin', 'Primordial', 'Éternel', 'Céleste', 'Interstellaire'];
 
   let html = `<div class="p-6 mt-12 rounded-lg shadow-lg relative glowing-image-${(equipment.rarity).toLowerCase()} ${valideRarity.includes(equipment.rarity) ? '' : 'bg-gray-800'}" style="z-index:1; ${valideRarity.includes(equipment.rarity)
     ? `background: linear-gradient(rgba(255,255,255,0.5),${addOpacity(rarityColors[equipment.rarity], 0.5)});`
@@ -949,6 +1013,32 @@ const renderEquipment = (equipment) => {
               </div>
               `
     imageRotate = '/assets/bg-icons/rotateBG5.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-24 h-24 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+  } else if (equipment.rarity == 'Interstellaire') {
+    imageRotate = '/assets/bg-icons/rotateBG5.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-40 h-40 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+    imageRotate = '/assets/bg-icons/rotateBG4.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-36 h-36 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+    imageRotate = '/assets/bg-icons/rotateBG3.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-32 h-32 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+    imageRotate = '/assets/bg-icons/rotateBG2.png';
+    html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
+                <img src="${imageRotate}" class="celeste-rarity w-28 h-28 object-contain" onerror="this.src='${fallbackImages['default']}';">
+              </div>
+              `
+    imageRotate = '/assets/bg-icons/rotateBG1.png';
     html += ` <div class="ml-4 absolute p-6" style="border-radius:50%; top:-60px; right:-60px;">
                 <img src="${imageRotate}" class="celeste-rarity w-24 h-24 object-contain" onerror="this.src='${fallbackImages['default']}';">
               </div>
