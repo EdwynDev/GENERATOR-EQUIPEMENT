@@ -1,4 +1,3 @@
-// Probabilités pour les raretés
 const rarityProbabilities = {
   'Commun': 40, // 40%
   'Peu_commun': 30, // 30%
@@ -12,7 +11,6 @@ const rarityProbabilities = {
   'Céleste': 0.0001 //0.0001%
 };
 
-// Probabilités pour les qualités
 const qualityProbabilities = {
   'Endommagée': 20, // 20%
   'Normale': 50, // 50%
@@ -24,7 +22,6 @@ const qualityProbabilities = {
   'Immatérielle': 0.05 // 0.05%
 };
 
-// Probabilités pour le nombre d'étoiles
 const starProbabilities = {
   1: 50, // 50%
   2: 30, // 30%
@@ -39,7 +36,6 @@ const starProbabilities = {
   11: 0.0001 // 0.0001%
 };
 
-// Couleurs des raretés
 const rarityColors = {
   'Commun': '#c0c0c0', // Gris
   'Peu_commun': '#1a9334', // Vert
@@ -50,10 +46,9 @@ const rarityColors = {
   'Divin': '#f0d77a', // Or clair
   'Primordial': '#00ffff', // Cyan
   'Éternel': '#ff00ff', // Magenta
-  'Céleste': '#280f3d' // 
+  'Céleste': '#280f3d' // Violet-Noir
 };
 
-// Images des équipements par nom
 const equipmentImages = {
   // Armes
   'Épée du chaos': '/assets/images/weapons/epee-chaos.png',
@@ -176,7 +171,6 @@ const equipmentImages = {
   'Transformation en Titan': '/assets/images/powers/transformation-titan.png',
 };
 
-// Image de secours si l'image spécifique n'est pas trouvée
 const fallbackImages = {
   'Arme': '/assets/images/default/default-weapon.png',
   'Armure': '/assets/images/default/default-armor.png',
@@ -190,13 +184,11 @@ const fallbackImages = {
   'Pouvoir': '/assets/images/default/default-power.png'
 };
 
-// Fonction pour générer les données nécessaires
 function generateEquipmentData() {
   const equipmentTypes = ['Arme', 'Armure', 'Accessoire', 'Bouclier', 'Casque', 'Bottes', 'Gants', 'Ceinture', 'Jambières', 'Pouvoir'];
   const rarities = ['Commun', 'Peu_commun', 'Rare', 'Épique', 'Légendaire', 'Mythique', 'Divin', 'Primordial', 'Éternel', 'Céleste'];
   const qualities = ['Endommagée', 'Normale', 'Supérieure', 'Avancée', 'Parfaite', 'Flamboyante', 'Divine', 'Immatérielle'];
 
-  // Liste de noms possibles par type
   const namesByType = {
     'Arme': [
       'Épée du chaos', 'Hache du dragon', 'Dague de l\'ombre', 'Arc céleste', 'Marteau de guerre',
@@ -240,7 +232,6 @@ function generateEquipmentData() {
     ]
   };
 
-  // Calculer le nombre total de combinaisons possibles
   const totalNames = Object.values(namesByType).reduce((sum, names) => sum + names.length, 0);
   const possibilityNames = totalNames / equipmentTypes.length;
   const totalPossibilities = equipmentTypes.length * possibilityNames * rarities.length * qualities.length * 11;
@@ -254,13 +245,9 @@ function generateEquipmentData() {
   };
 }
 
-// Générer les données
 const equipmentData = generateEquipmentData();
-
-// Calculer le nombre total de combinaisons possibles
 const totalPossibilities = equipmentData.totalPossibilities;
 
-// Fonction pour choisir un élément basé sur des probabilités
 const chooseWithProbability = (probabilities) => {
   const total = Object.values(probabilities).reduce((sum, prob) => sum + prob, 0);
   const random = Math.random() * total;
@@ -274,14 +261,11 @@ const chooseWithProbability = (probabilities) => {
   }
 };
 
-// État de l'application
 let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
 let currentIndex = 0;
 let filter = '';
 let filterType = '';
 let filterRarity = '';
-
-// Référence aux éléments DOM
 const equipmentDisplay = document.getElementById('equipment-display');
 const inventoryCounter = document.getElementById('inventory-counter');
 const progressionInfo = document.getElementById('progression-info');
@@ -296,13 +280,13 @@ const statsCount = document.getElementById('stats-count');
 const statsTypes = document.getElementById('stats-types');
 const statsRarities = document.getElementById('stats-rarities');
 const statsValue = document.getElementById('stats-value');
-// Variables pour l'index
-let indexPage = 0;
-const itemsPerPage = 20; // Nombre d'items par page de l'index
-let itemsGenerator = null; // Remplace allPossibleItems
-let currentPageItems = []; // Stocke les items de la page actuelle
 
-// Référence aux éléments DOM de l'index
+
+
+let indexPage = 0;
+const itemsPerPage = 20;
+let itemsGenerator = null;
+let currentPageItems = [];
 const indexModal = document.getElementById('index-modal');
 const showIndexButton = document.getElementById('show-index');
 const closeIndexButton = document.getElementById('close-index');
@@ -311,9 +295,7 @@ const indexPagination = document.getElementById('index-pagination');
 const indexPrevButton = document.getElementById('index-prev');
 const indexNextButton = document.getElementById('index-next');
 
-// Générer la liste complète des équipements possibles
 const generateAllPossibleItems = () => {
-  // Au lieu de générer tous les items, on calcule simplement le nombre total
   let totalCount = 0;
 
   for (const type of equipmentData.equipmentTypes) {
@@ -336,13 +318,11 @@ const generateAllPossibleItems = () => {
       const items = [];
       let currentIndex = 0;
 
-      // Parcourir toutes les combinaisons possibles mais ne créer que celles de la page actuelle
       for (const type of equipmentData.equipmentTypes) {
         for (const name of equipmentData.namesByType[type]) {
           for (const rarity of equipmentData.rarities) {
             for (const quality of equipmentData.qualities) {
               for (let stars = 1; stars <= 11; stars++) {
-                // Ne créer l'objet que s'il est dans la plage de la page actuelle
                 if (currentIndex >= start && currentIndex < end) {
                   const item = {
                     id: `${type}-${name}-${rarity}-${quality}-${stars}`,
@@ -351,13 +331,12 @@ const generateAllPossibleItems = () => {
                     rarity,
                     quality,
                     stars,
-                    owned: false // Par défaut, non possédé
+                    owned: false
                   };
                   items.push(item);
                 }
 
                 currentIndex++;
-                // Si on a dépassé la fin de la page, on peut arrêter
                 if (currentIndex >= end) {
                   break;
                 }
@@ -376,7 +355,6 @@ const generateAllPossibleItems = () => {
   };
 };
 
-// Vérifier si un item est dans l'inventaire
 const checkIfOwned = () => {
   currentPageItems.forEach(item => {
     item.owned = inventory.some(invItem =>
@@ -389,11 +367,9 @@ const checkIfOwned = () => {
   });
 };
 
-// Afficher la page actuelle de l'index
 const renderIndexPage = () => {
   indexGrid.innerHTML = '';
 
-  // Obtenir les items pour la page actuelle
   if (!itemsGenerator) {
     itemsGenerator = generateAllPossibleItems();
   }
@@ -405,13 +381,12 @@ const renderIndexPage = () => {
     const itemDiv = document.createElement('div');
     itemDiv.className = `bg-gray-800 rounded p-3 flex flex-col items-center relative`;
 
-    // Ajouter le cadenas pour les items non possédés
     if (!item.owned) {
       const lockIcon = document.createElement('div');
       lockIcon.className = 'absolute top-2 right-2 text-gray-400';
       lockIcon.innerHTML = feather.icons.lock.toSvg({ width: 16, height: 16 });
       itemDiv.appendChild(lockIcon);
-      // Obtenir l'URL de l'image
+
       const imageUrl = fallbackImages[item.type];
       let itemBGROTATE;
       let imageRotate;
@@ -476,7 +451,6 @@ const renderIndexPage = () => {
         itemDiv.appendChild(itemBGROTATE);
       }
 
-      // Ajouter l'image
       const itemImage = document.createElement('div');
       itemImage.className = 'w-12 h-12 mb-2';
       itemImage.innerHTML = `<img src="${imageUrl}" alt="${item.name}" class="glowing-image-${(item.rarity).toLowerCase()} w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
@@ -522,7 +496,7 @@ const renderIndexPage = () => {
       itemDiv.appendChild(itemDetails);
       itemDiv.appendChild(itemStars);
     } else {
-      // Obtenir l'URL de l'image
+
       const imageUrl = /*equipmentImages[item.name] ||*/ fallbackImages[item.type];
       let itemBGROTATE;
       let imageRotate;
@@ -587,7 +561,6 @@ const renderIndexPage = () => {
         itemDiv.appendChild(itemBGROTATE);
       }
 
-      // Ajouter l'image
       const itemImage = document.createElement('div');
       itemImage.className = 'w-12 h-12 mb-2';
       itemImage.innerHTML = `<img src="${imageUrl}" alt="${item.name}" class="glowing-image-${(item.rarity).toLowerCase()} w-full h-full object-contain" onerror="this.src='${fallbackImages['default']}';">`;
@@ -637,36 +610,28 @@ const renderIndexPage = () => {
     indexGrid.appendChild(itemDiv);
   });
 
-  // Mise à jour de la pagination
   const totalPages = Math.ceil(itemsGenerator.totalCount / itemsPerPage);
   indexPagination.textContent = `Page ${indexPage + 1} / ${totalPages}`;
 
-  // Activer/désactiver les boutons de navigation
   indexPrevButton.disabled = indexPage === 0;
   indexNextButton.disabled = indexPage >= totalPages - 1;
 };
 
-// Ouvrir l'index
 const openIndex = () => {
-  // Initialiser le générateur d'items si ce n'est pas déjà fait
   if (!itemsGenerator) {
     itemsGenerator = generateAllPossibleItems();
   }
 
-  // Afficher la première page
   indexPage = 0;
   renderIndexPage();
 
-  // Afficher la modal
   indexModal.classList.remove('hidden');
 };
 
-// Fermer l'index
 const closeIndex = () => {
   indexModal.classList.add('hidden');
 };
 
-// Page précédente de l'index
 const prevIndexPage = () => {
   if (indexPage > 0) {
     indexPage--;
@@ -674,7 +639,6 @@ const prevIndexPage = () => {
   }
 };
 
-// Page suivante de l'index
 const nextIndexPage = () => {
   if (!itemsGenerator) {
     itemsGenerator = generateAllPossibleItems();
@@ -687,10 +651,8 @@ const nextIndexPage = () => {
   }
 };
 
-// Générer un ID unique
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
-// Peuplement des sélecteurs de filtre
 equipmentData.equipmentTypes.forEach(type => {
   const option = document.createElement('option');
   option.value = type;
@@ -705,7 +667,6 @@ equipmentData.rarities.forEach(rarity => {
   rarityFilter.appendChild(option);
 });
 
-// Générateur d'équipement aléatoire
 const generateRandomEquipment = () => {
   const type = equipmentData.equipmentTypes[Math.floor(Math.random() * equipmentData.equipmentTypes.length)];
   const rarity = chooseWithProbability(rarityProbabilities);
@@ -715,7 +676,6 @@ const generateRandomEquipment = () => {
   const names = equipmentData.namesByType[type] || ['Objet mystérieux'];
   const name = names[Math.floor(Math.random() * names.length)];
 
-  // Statistiques basées sur la rareté
   const statMultiplier = equipmentData.rarities.indexOf(rarity) + 1;
   const qualityMultiplier = equipmentData.qualities.indexOf(quality) + 0.8;
 
@@ -770,14 +730,11 @@ const generateEquipment = () => {
   localStorage.setItem('inventory', JSON.stringify(inventory));
   updateUI();
 
-  // Mettre à jour l'index si ouvert
   if (!indexModal.classList.contains('hidden')) {
-    // Pas besoin de vérifier la longueur, puisque nous utilisons maintenant le générateur
-    renderIndexPage(); // Cette fonction appelle déjà checkIfOwned
+    renderIndexPage();
   }
 };
 
-// Filtrer l'inventaire
 const getFilteredInventory = () => {
   return inventory.filter(item => {
     const nameMatch = item.name.toLowerCase().includes(filter.toLowerCase());
@@ -787,7 +744,6 @@ const getFilteredInventory = () => {
   });
 };
 
-// Navigation dans l'inventaire
 const goToPrevious = () => {
   if (currentIndex > 0) {
     currentIndex--;
@@ -803,7 +759,6 @@ const goToNext = () => {
   }
 };
 
-// Réinitialiser les filtres
 const resetFilters = () => {
   filter = '';
   filterType = '';
@@ -815,7 +770,6 @@ const resetFilters = () => {
   updateUI();
 };
 
-// Mettre à jour les statistiques
 const updateStats = () => {
   statsCount.textContent = inventory.length;
   statsTypes.textContent = new Set(inventory.map(item => item.type)).size;
@@ -823,14 +777,12 @@ const updateStats = () => {
   statsValue.textContent = inventory.reduce((sum, item) => sum + (item.sellValue || 0), 0) + ' or';
 };
 
-// Rendu de l'équipement
 const renderEquipment = (equipment) => {
   if (!equipment) {
     equipmentDisplay.innerHTML = '<div class="p-6 text-center">Aucun équipement trouvé</div>';
     return;
   }
 
-  // Obtenir l'URL de l'image
   const imageUrl = /*equipmentImages[equipment.name] ||*/ fallbackImages[equipment.type];
   let imageRotate = '';
 
@@ -912,7 +864,6 @@ const renderEquipment = (equipment) => {
             <div class="mb-3">
       `;
 
-  // Afficher les étoiles
   for (let i = 0; i < equipment.stars; i++) {
     html += `<span style="color: ${equipment.starColor}" class="${(equipment.rarity).toLowerCase()}-item">★</span>`;
   }
@@ -927,7 +878,6 @@ const renderEquipment = (equipment) => {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 border-t border-gray-700 pt-4">
       `;
 
-  // Afficher les stats
   if (equipment.attack !== undefined) {
     html += `
           <div style="box-shadow: inset 0 -10px 13px -10px #195F53;" class="flex justify-left border-l pl-2 border-b pb-2 border-r border-t pt-2 rounded-lg border-green-500">
@@ -1046,39 +996,31 @@ const renderEquipment = (equipment) => {
   equipmentDisplay.innerHTML = html;
 };
 
-// Mettre à jour l'interface
 const updateUI = () => {
   const filteredInventory = getFilteredInventory();
   const currentEquipment = filteredInventory[currentIndex];
 
   renderEquipment(currentEquipment);
 
-  // Mise à jour du compteur d'inventaire
   inventoryCounter.textContent = filteredInventory.length > 0 ? `${currentIndex + 1}/${filteredInventory.length}` : '0/0';
 
-  // Mise à jour de l'info de progression
   if (!itemsGenerator) {
     itemsGenerator = generateAllPossibleItems();
   }
   progressionInfo.textContent = `${inventory.length}/${itemsGenerator.totalCount}`;
 
-  // Activer/désactiver les boutons
   prevButton.disabled = currentIndex === 0 || filteredInventory.length === 0;
   nextButton.disabled = currentIndex >= filteredInventory.length - 1 || filteredInventory.length === 0;
 
-  // Mise à jour des statistiques
   updateStats();
 
-  // Mise à jour de l'index si ouvert
   if (!indexModal.classList.contains('hidden')) {
     renderIndexPage();
   }
 
-  // Initialiser Feather Icons
   feather.replace();
 };
 
-// Écouteurs d'événements
 generateButton.addEventListener('click', generateEquipment);
 prevButton.addEventListener('click', goToPrevious);
 nextButton.addEventListener('click', goToNext);
@@ -1106,7 +1048,6 @@ rarityFilter.addEventListener('change', (e) => {
   updateUI();
 });
 
-// Initialisation
 document.addEventListener('DOMContentLoaded', () => {
   feather.replace();
   generateEquipment();
