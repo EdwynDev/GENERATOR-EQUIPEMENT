@@ -33,7 +33,16 @@ const starProbabilities = {
   8: 0.1, // 0.1%
   9: 0.05, // 0.05%
   10: 0.01, // 0.01%
-  11: 0.0001 // 0.0001%
+  11: 0.0001, // 0.0001%
+  12: 0.00001, // 0.00001%
+  13: 0.000001, // 0.000001%
+  14: 0.0000001, // 0.0000001%
+  15: 0.00000001, // 0.00000001%
+  16: 0.000000001, // 0.000000001%
+  17: 0.0000000001, // 0.0000000001%
+  18: 0.00000000001, // 0.00000000001%
+  19: 0.000000000001, // 0.000000000001%
+  20: 0.0000000000001 // 0.0000000000001%
 };
 
 const rarityColors = {
@@ -302,7 +311,7 @@ const generateAllPossibleItems = () => {
     for (const name of equipmentData.namesByType[type]) {
       for (const rarity of equipmentData.rarities) {
         for (const quality of equipmentData.qualities) {
-          for (let stars = 1; stars <= 11; stars++) {
+          for (let stars = 1; stars <= 20; stars++) {
             totalCount++;
           }
         }
@@ -322,7 +331,7 @@ const generateAllPossibleItems = () => {
         for (const name of equipmentData.namesByType[type]) {
           for (const rarity of equipmentData.rarities) {
             for (const quality of equipmentData.qualities) {
-              for (let stars = 1; stars <= 11; stars++) {
+              for (let stars = 1; stars <= 20; stars++) {
                 if (currentIndex >= start && currentIndex < end) {
                   const item = {
                     id: `${type}-${name}-${rarity}-${quality}-${stars}`,
@@ -484,7 +493,7 @@ const renderIndexPage = () => {
         itemStars.appendChild(star);
       }
 
-      for (let i = item.stars; i < 11; i++) {
+      for (let i = item.stars; i < 20; i++) {
         const star = document.createElement('span');
         star.className = 'text-gray-600';
         star.textContent = '★';
@@ -594,7 +603,7 @@ const renderIndexPage = () => {
         itemStars.appendChild(star);
       }
 
-      for (let i = item.stars; i < 11; i++) {
+      for (let i = item.stars; i < 20; i++) {
         const star = document.createElement('span');
         star.className = 'text-gray-600';
         star.textContent = '★';
@@ -867,8 +876,8 @@ const renderEquipment = (equipment) => {
   for (let i = 0; i < equipment.stars; i++) {
     html += `<span style="color: ${equipment.starColor}" class="${(equipment.rarity).toLowerCase()}-item">★</span>`;
   }
-  for (let i = equipment.stars; i < 11; i++) {
-    html += `<span class="text-gray-600">★${!(i + 1 < 11) ? `(${equipment.stars})` : ''}</span>`;
+  for (let i = equipment.stars; i < 20; i++) {
+    html += `<span class="text-gray-600">★${!(i + 1 < 20) ? `(${equipment.stars})` : ''}</span>`;
   }
 
   html += `
