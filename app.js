@@ -27,7 +27,7 @@ const rarityProbabilities = {
   'Primordial': 0.05, // 0.05%
   'Éternel': 0.01, // 0.01%
   'Céleste': 0.0001, //0.0001%
-  'Interstellaire': 0.00001 //0.00001%
+  'Interstellaire': 0.0005 //0.0005%
 };
 
 const qualityProbabilities = {
@@ -52,16 +52,16 @@ const starProbabilities = {
   8: 0.1, // 0.1%
   9: 0.05, // 0.05%
   10: 0.01, // 0.01%
-  11: 0.0001, // 0.0001%
-  12: 0.00001, // 0.00001%
-  13: 0.000001, // 0.000001%
-  14: 0.0000001, // 0.0000001%
-  15: 0.00000001, // 0.00000001%
-  16: 0.000000001, // 0.000000001%
-  17: 0.0000000001, // 0.0000000001%
-  18: 0.00000000001, // 0.00000000001%
-  19: 0.000000000001, // 0.000000000001%
-  20: 0.0000000000001 // 0.0000000000001%
+  11: 0.001, // 0.001%
+  12: 0.0005, // 0.0005%
+  13: 0.00001, // 0.00001%
+  14: 0.000005, // 0.000005%
+  15: 0.0000001, // 0.0000001%
+  16: 0.00000005, // 0.00000005%
+  17: 0.000000001, // 0.000000001%
+  18: 0.0000000005, // 0.0000000005%
+  19: 0.00000000001, // 0.00000000001%
+  20: 0.000000000005 // 0.000000000005%
 };
 
 const rarityColors = {
@@ -823,25 +823,25 @@ const generateRandomEquipment = () => {
     quality,
     stars,
     starColor: rarity === 'Interstellaire' ? '#000000' : rarity === 'Primordial' ? '#00ffff' : rarity === 'Éternel' ? '#ff00ff' : rarity === 'Céleste' ? '#280f3d' : rarity === 'Divin' ? '#ffd700' : rarity === 'Mythique' ? '#e01a6b' : '#ffcc00',
-    attack: type === 'Arme' ? Math.floor(10 * statMultiplier * qualityMultiplier) : undefined,
-    defense: ['Armure', 'Bouclier', 'Casque'].includes(type) ? Math.floor(8 * statMultiplier * qualityMultiplier) : undefined,
-    magic: ['Arme', 'Accessoire'].includes(type) ? Math.floor(6 * statMultiplier * qualityMultiplier) : undefined,
-    strength: Math.random() > 0.5 ? Math.floor(3 * statMultiplier * qualityMultiplier) : undefined,
-    agility: Math.random() > 0.5 ? Math.floor(3 * statMultiplier * qualityMultiplier) : undefined,
-    intelligence: Math.random() > 0.5 ? Math.floor(3 * statMultiplier * qualityMultiplier) : undefined,
-    vitality: Math.random() > 0.5 ? Math.floor(4 * statMultiplier * qualityMultiplier) : undefined,
-    critChance: Math.random() > 0.7 ? Math.floor(2 * statMultiplier * qualityMultiplier) : undefined,
-    critDamage: Math.random() > 0.7 ? Math.floor(5 * statMultiplier * qualityMultiplier) : undefined,
-    level: Math.floor(5 * statMultiplier * qualityMultiplier),
-    requiredLevel: Math.floor(3 * statMultiplier),
+    attack: type === 'Arme' ? Math.floor(10 * statMultiplier * qualityMultiplier * (stars * 0.85)) : undefined,
+    defense: ['Armure', 'Bouclier', 'Casque'].includes(type) ? Math.floor(8 * statMultiplier * qualityMultiplier * (stars * 0.85)) : undefined,
+    magic: ['Arme', 'Accessoire'].includes(type) ? Math.floor(6 * statMultiplier * qualityMultiplier * (stars * 0.85)) : undefined,
+    strength: Math.random() > 0.5 ? Math.floor(3 * statMultiplier * qualityMultiplier * (stars * 0.85)) : undefined,
+    agility: Math.random() > 0.5 ? Math.floor(3 * statMultiplier * qualityMultiplier * (stars * 0.85)) : undefined,
+    intelligence: Math.random() > 0.5 ? Math.floor(3 * statMultiplier * qualityMultiplier * (stars * 0.85)) : undefined,
+    vitality: Math.random() > 0.5 ? Math.floor(4 * statMultiplier * qualityMultiplier * (stars * 0.85)) : undefined,
+    critChance: Math.random() > 0.7 ? Math.floor(2 * statMultiplier * qualityMultiplier * (stars * 0.85)) : undefined,
+    critDamage: Math.random() > 0.7 ? Math.floor(5 * statMultiplier * qualityMultiplier * (stars * 0.85)) : undefined,
+    level: Math.floor(5 * statMultiplier * qualityMultiplier * (stars * 0.85)),
+    requiredLevel: Math.floor(3 * statMultiplier * (stars * 0.85)),
     description: `Un${type === 'Arme' || type === 'Armure' ? 'e' : ''} ${type.toLowerCase()} de qualité ${quality.toLowerCase()}.`,
     specialEffect: Math.random() > 0.7 ? "Effet spécial à découvrir" : undefined,
-    durability: Math.floor(50 * qualityMultiplier),
-    maxDurability: Math.floor(50 * qualityMultiplier),
+    durability: Math.floor(50 * qualityMultiplier * (stars * 0.85)),
+    maxDurability: Math.floor(50 * qualityMultiplier * (stars * 0.85)),
     enhancementLevel: 0,
-    maxEnhancementLevel: Math.floor(equipmentData.rarities.indexOf(rarity) + 3),
-    powerScore: Math.floor(100 * statMultiplier * qualityMultiplier),
-    sellValue: Math.floor(50 * statMultiplier * qualityMultiplier),
+    maxEnhancementLevel: Math.floor(equipmentData.rarities.indexOf(rarity) + 3 * (stars*0.85)),
+    powerScore: Math.floor(100 * statMultiplier * qualityMultiplier * (stars * 0.85)),
+    sellValue: Math.floor(50 * statMultiplier * qualityMultiplier * (stars * 0.85)),
   };
 };
 
